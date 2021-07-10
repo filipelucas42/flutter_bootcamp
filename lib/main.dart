@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   MyApp(this.notes);
   @override
   Widget build(BuildContext context) {
-    final title = 'Basic List';
+    final title = 'Notes';
 
     return MaterialApp(
       title: title,
@@ -44,7 +44,7 @@ class NewNoteScreen extends StatelessWidget {
   NewNoteScreen(this.notes);
   @override
   Widget build(BuildContext context) {
-    final title = 'Detail Page';
+    final title = 'Create Note';
 
     return Scaffold(
         appBar: AppBar(
@@ -150,7 +150,7 @@ class EditNoteScreen extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
-    final title = 'Detail Page';
+    final title = 'Edit Note';
 
     return Scaffold(
         appBar: AppBar(
