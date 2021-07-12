@@ -5,6 +5,12 @@ void main() {
   runApp(MyApp(notes));
 }
 
+class User {
+  bool active = false;
+}
+
+User user = new User();
+
 class MyApp extends StatelessWidget {
   Notes notes;
   MyApp(this.notes);
@@ -114,6 +120,10 @@ class Notes {
     this.notes[key] = note;
   }
 
+  deleteNote(String key) {
+    notes.remove(key);
+  }
+
   returnWidgets(BuildContext context) {
     var widgets = <Widget>[];
     this.notes.keys.forEach((element) {
@@ -153,30 +163,67 @@ class EditNoteScreen extends StatelessWidget {
     final title = 'Edit Note';
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(title),
-        ),
-        body: Column(
-          children: [
-            Padding(
-                padding: EdgeInsets.all(16),
-                child: TextFormField(
-                  controller: noteTitle,
-                  maxLines: null,
-                )),
-            Expanded(
-                child: Padding(
-                    padding: EdgeInsets.all(16),
-                    child: TextFormField(
-                      controller: noteForm,
-                      minLines: 6,
-                      keyboardType: TextInputType.multiline,
-                      maxLines: null,
-                    )))
-          ],
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: FloatingActionButton.extended(
+      appBar: AppBar(
+        title: Text(title),
+      ),
+      body: Column(
+        children: [
+          Padding(
+              padding: EdgeInsets.all(16),
+              child: TextFormField(
+                controller: noteTitle,
+                maxLines: null,
+              )),
+          Expanded(
+              child: Padding(
+                  padding: EdgeInsets.all(16),
+                  child: TextFormField(
+                    controller: noteForm,
+                    minLines: 6,
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                  )))
+        ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Row(
+        mainAxisAlignment:
+            MainAxisAlignment.center, //Center Row contents horizontally,
+
+        children: [
+          FloatingActionButton.extended(
+              onPressed: () {
+                var text = this.noteForm.text.toString();
+                var title = this.noteTitle.text.toString();
+                var note = new Note(title, text);
+                print("on press key ${this.note.key}");
+                note.key = this.note.key;
+                this.notes.changeNote(this.note.key, note);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyApp(this.notes)),
+                );
+              },
+              heroTag: "edit button",
+              label: Text("Edit Note")),
+          SizedBox(
+            height: 10,
+            width: 10,
+          ),
+          FloatingActionButton.extended(
+              onPressed: () {
+                var key = this.note.key;
+                this.notes.deleteNote(key);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyApp(this.notes)),
+                );
+              },
+              heroTag: "delete button",
+              label: Text("Delete Note"))
+        ],
+      ),
+/*         floatingActionButton: FloatingActionButton.extended(
             onPressed: () {
               var text = this.noteForm.text.toString();
               var title = this.noteTitle.text.toString();
@@ -189,6 +236,7 @@ class EditNoteScreen extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => MyApp(this.notes)),
               );
             },
-            label: Text("Edit Note")));
+            label: Text("Edit Note")) */
+    );
   }
 }
