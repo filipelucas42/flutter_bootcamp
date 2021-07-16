@@ -9,7 +9,7 @@ Command to run on web: `flutter run -d web-server --web-hostname=0.0.0.0 --web-p
 * create notes with title and text
 * edit notes
 * delete notes
-* `Get Insprired` button that retrieves inspirational quotes from an api
+* `Get Inspired` button that retrieves inspirational quotes from an api
 * Store notes locally so they are persistant over sessions
 
 ## Screen shots
