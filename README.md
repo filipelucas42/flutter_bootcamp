@@ -1,5 +1,9 @@
 # Flutter Bootcamp - Note taking app (CapStone Project)
 
+Tested for web and macos desktop
+
+Command to run on web: `flutter run -d web-server --web-hostname=0.0.0.0 --web-port=8000`
+
 ## Features
 
 * create notes with title and text
